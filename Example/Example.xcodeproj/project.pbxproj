@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,23 @@
 		A4C784C9258B91B7009BB00C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C784C8258B91B7009BB00C /* ContentView.swift */; };
 		A4C784CB258B91B9009BB00C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C784CA258B91B9009BB00C /* Assets.xcassets */; };
 		A4C784CE258B91B9009BB00C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C784CD258B91B9009BB00C /* Preview Assets.xcassets */; };
+		A4C784DB258B9213009BB00C /* RespondableTextField in Frameworks */ = {isa = PBXBuildFile; productRef = A4C784DA258B9213009BB00C /* RespondableTextField */; };
+		A4C784DC258B9213009BB00C /* RespondableTextField in Embed Frameworks */ = {isa = PBXBuildFile; productRef = A4C784DA258B9213009BB00C /* RespondableTextField */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A4C784DD258B9214009BB00C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A4C784DC258B9213009BB00C /* RespondableTextField in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A4C784C3258B91B7009BB00C /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -20,6 +36,7 @@
 		A4C784CA258B91B9009BB00C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A4C784CD258B91B9009BB00C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A4C784CF258B91B9009BB00C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4C784D6258B91EA009BB00C /* RespondableTextField */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RespondableTextField; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4C784DB258B9213009BB00C /* RespondableTextField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,8 +54,10 @@
 		A4C784BA258B91B7009BB00C = {
 			isa = PBXGroup;
 			children = (
+				A4C784D6258B91EA009BB00C /* RespondableTextField */,
 				A4C784C5258B91B7009BB00C /* Example */,
 				A4C784C4258B91B7009BB00C /* Products */,
+				A4C784D9258B9213009BB00C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +89,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		A4C784D9258B9213009BB00C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -79,12 +106,16 @@
 				A4C784BF258B91B7009BB00C /* Sources */,
 				A4C784C0258B91B7009BB00C /* Frameworks */,
 				A4C784C1258B91B7009BB00C /* Resources */,
+				A4C784DD258B9214009BB00C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Example;
+			packageProductDependencies = (
+				A4C784DA258B9213009BB00C /* RespondableTextField */,
+			);
 			productName = Example;
 			productReference = A4C784C3258B91B7009BB00C /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -328,6 +359,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A4C784DA258B9213009BB00C /* RespondableTextField */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RespondableTextField;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A4C784BB258B91B7009BB00C /* Project object */;
 }
