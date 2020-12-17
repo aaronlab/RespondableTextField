@@ -18,7 +18,7 @@
 - In Xcode, add the URL of this repository in SwiftPM:
 
   ```http
-  https://github.com/aaronLab/RespondableTextField
+  https://github.com/aaronLab/RespondableTextField.git
   ```
 
 ## Usage
