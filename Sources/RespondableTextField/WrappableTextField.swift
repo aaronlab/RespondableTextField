@@ -7,10 +7,22 @@
 
 import UIKit
 
-public class WrappableTextField: UITextField, UITextFieldDelegate {
+@available(iOS 13.0, *)
+public class WrappableTextField: UITextField {
+    
+    // MARK: - PROPERTIES
     
     var onEditing: ((String) -> Void)?
     var onCommitted: (() -> Void)?
+    var didBeginEditing: (() -> Void)?
+    var didEndEditing: ((UITextField.DidEndEditingReason) -> Void)?
+    
+}
+
+// MARK: - UITextFieldDelegate
+
+@available(iOS 13.0, *)
+extension WrappableTextField: UITextFieldDelegate {
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let next = textField.superview?.superview?.viewWithTag(textField.tag + 1) as? UITextField {
@@ -24,13 +36,21 @@ public class WrappableTextField: UITextField, UITextFieldDelegate {
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let val = textField.text as NSString? {
             let newVal = val.replacingCharacters(in: range, with: string)
-            onEditing?(newVal as String)
+            self.onEditing?(newVal as String)
         }
         return true
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        onCommitted?()
+        self.onCommitted?()
+    }
+    
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.didBeginEditing?()
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        self.didEndEditing?(reason)
     }
     
 }
