@@ -25,7 +25,7 @@
 
 - `import RespondableTextField`
 - Add `RespondableTextField` in your body like below.
-- **_⚠️To make it work properly: The tags of each RespondableTextField in each body must be increased SEQUENTIALLY in order.⚠️_**
+- **_⚠️ To make it work properly: The tags of each RespondableTextField in each body must be increased SEQUENTIALLY in order. ⚠️_**
 
   ```Swift
   RespondableTextField(
