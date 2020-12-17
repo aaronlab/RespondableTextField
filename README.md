@@ -5,7 +5,7 @@
 
 # RespondableTextField
 
-`RespondableTextField` is a simple textField library for SwiftUI. The reason why I wanted to make this library was because I was too lazy to make `UIViewRepresentable`views every single time. Also, I know you were really struggling from, or tired of taking care of UITextFieldDelegate methods, such as `becomeFirstResponder`, `resignFirstResponder`. I really hope this helps you.s
+`RespondableTextField` is a simple textField library for SwiftUI. The reason why I wanted to make this library was because I was too lazy to make `UIViewRepresentable`views every single time. Also, I know you were really struggling from, or tired of taking care of UITextFieldDelegate methods, such as `becomeFirstResponder`, `resignFirstResponder`. I really hope this helps you.
 
 <img src="./preview.png" width="260">
 
