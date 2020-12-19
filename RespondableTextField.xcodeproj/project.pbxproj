@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		A4C784E5258B9545009BB00C /* WrappableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C784E4258B9545009BB00C /* WrappableTextField.swift */; };
 		OBJ_24 /* RespondableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* RespondableTextField.swift */; };
 		OBJ_31 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_42 /* RespondableTextFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* RespondableTextFieldTests.swift */; };
@@ -47,7 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A4C784E4258B9545009BB00C /* WrappableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WrappableTextField.swift; sourceTree = "<group>"; };
 		OBJ_12 /* RespondableTextFieldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RespondableTextFieldTests.swift; sourceTree = "<group>"; };
 		OBJ_13 /* XCTestManifests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestManifests.swift; sourceTree = "<group>"; };
 		OBJ_17 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -104,7 +102,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -114,7 +112,6 @@
 				OBJ_17 /* LICENSE */,
 				OBJ_18 /* README.md */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -129,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_9 /* RespondableTextField.swift */,
-				A4C784E4258B9545009BB00C /* WrappableTextField.swift */,
 			);
 			name = RespondableTextField;
 			path = Sources/RespondableTextField;
@@ -201,7 +197,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -219,7 +215,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				A4C784E5258B9545009BB00C /* WrappableTextField.swift in Sources */,
 				OBJ_24 /* RespondableTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
