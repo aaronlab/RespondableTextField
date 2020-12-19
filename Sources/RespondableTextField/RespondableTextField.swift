@@ -19,7 +19,6 @@ public struct RespondableTextField: UIViewRepresentable {
     let tag: Int
     let placeholder: String?
     let onEditing: ((String) -> Void)?
-    let onCommitted: (() -> Void)?
     let didBeginEditing: (() -> Void)?
     let didEndEditing: (() -> Void)?
     
@@ -31,7 +30,6 @@ public struct RespondableTextField: UIViewRepresentable {
         isFirstResponder: Bool = false,
         placeholder: String? = nil,
         onEditing: ((String) -> Void)? = nil,
-        onCommitted: (() -> Void)? = nil,
         didBeginEditing: (() -> Void)? = nil,
         didEndEditing: (() -> Void)? = nil
     ) {
@@ -40,7 +38,6 @@ public struct RespondableTextField: UIViewRepresentable {
         self.isFirstResponder = isFirstResponder
         self.placeholder = placeholder
         self.onEditing = onEditing
-        self.onCommitted = onCommitted
         self.didBeginEditing = didBeginEditing
         self.didEndEditing = didEndEditing
     }
@@ -72,7 +69,7 @@ public struct RespondableTextField: UIViewRepresentable {
 extension RespondableTextField {
     
     public func makeCoordinator() -> RespondableTextField.Coordinator {
-        return Coordinator(text: $text, tag: tag, isFirstResponder: isFirstResponder, placeholder: placeholder, onEditing: onEditing, onCommitted: onCommitted, didBeginEditing: didBeginEditing, didEndEditing: didEndEditing)
+        return Coordinator(text: $text, tag: tag, isFirstResponder: isFirstResponder, placeholder: placeholder, onEditing: onEditing, didBeginEditing: didBeginEditing, didEndEditing: didEndEditing)
     }
     
     public class Coordinator: NSObject, UITextFieldDelegate {
@@ -85,7 +82,6 @@ extension RespondableTextField {
         var didBecomeFirstResponder = false
         let placeholder: String?
         let onEditing: ((String) -> Void)?
-        let onCommitted: (() -> Void)?
         let didBeginEditing: (() -> Void)?
         let didEndEditing: (() -> Void)?
         
@@ -97,7 +93,6 @@ extension RespondableTextField {
             isFirstResponder: Bool = false,
             placeholder: String? = nil,
             onEditing: ((String) -> Void)? = nil,
-            onCommitted: (() -> Void)? = nil,
             didBeginEditing: (() -> Void)? = nil,
             didEndEditing: (() -> Void)? = nil
         ) {
@@ -106,7 +101,6 @@ extension RespondableTextField {
             self.isFirstResponder = isFirstResponder
             self.placeholder = placeholder
             self.onEditing = onEditing
-            self.onCommitted = onCommitted
             self.didBeginEditing = didBeginEditing
             self.didEndEditing = didEndEditing
         }
