@@ -12,25 +12,32 @@ public struct RespondableTextField: UIViewRepresentable {
     
     // MARK: - PROPERTIES
     
-    private let wrappableTextField = WrappableTextField()
-    var tag: Int = 0
-    var placeholder: String?
-    var onEditing: ((String) -> Void)?
-    var onCommitted: (() -> Void)?
-    var didBeginEditing: (() -> Void)?
-    var didEndEditing: ((UITextField.DidEndEditingReason) -> Void)?
+    private let textField = UITextField(frame: .zero)
+    
+    @Binding var text: String
+    let isFirstResponder: Bool
+    let tag: Int
+    let placeholder: String?
+    let onEditing: ((String) -> Void)?
+    let onCommitted: (() -> Void)?
+    let didBeginEditing: (() -> Void)?
+    let didEndEditing: (() -> Void)?
     
     // MARK: - INIT
     
     public init(
+        text: Binding<String>,
         tag: Int,
+        isFirstResponder: Bool = false,
         placeholder: String? = nil,
         onEditing: ((String) -> Void)? = nil,
         onCommitted: (() -> Void)? = nil,
         didBeginEditing: (() -> Void)? = nil,
-        didEndEditing: ((UITextField.DidEndEditingReason) -> Void)? = nil
+        didEndEditing: (() -> Void)? = nil
     ) {
+        self._text = text
         self.tag = tag
+        self.isFirstResponder = isFirstResponder
         self.placeholder = placeholder
         self.onEditing = onEditing
         self.onCommitted = onCommitted
@@ -40,20 +47,102 @@ public struct RespondableTextField: UIViewRepresentable {
     
     // MARK: - UIViewRepresentable
     
-    public func makeUIView(context: UIViewRepresentableContext<RespondableTextField>) -> WrappableTextField {
-        self.wrappableTextField.tag = self.tag
-        self.wrappableTextField.delegate = self.wrappableTextField
-        self.wrappableTextField.placeholder = self.placeholder
-        self.wrappableTextField.onEditing = self.onEditing
-        self.wrappableTextField.onCommitted = self.onCommitted
-        self.wrappableTextField.didBeginEditing = self.didBeginEditing
-        self.wrappableTextField.didEndEditing = self.didEndEditing
-        return self.wrappableTextField
+    public func makeUIView(context: UIViewRepresentableContext<RespondableTextField>) -> UITextField {
+        self.textField.tag = self.tag
+        self.textField.placeholder = self.placeholder
+        self.textField.delegate = context.coordinator
+        return textField
     }
     
-    public func updateUIView(_ uiView: WrappableTextField, context: UIViewRepresentableContext<RespondableTextField>) {
+    public func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<RespondableTextField>) {
         uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         uiView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        uiView.text = self.text
+        if isFirstResponder && !context.coordinator.didBecomeFirstResponder {
+            uiView.becomeFirstResponder()
+            context.coordinator.didBecomeFirstResponder = true
+        }
+    }
+    
+}
+
+// MARK: - COORDINATOR
+
+@available(iOS 13.0, *)
+extension RespondableTextField {
+    
+    public func makeCoordinator() -> RespondableTextField.Coordinator {
+        return Coordinator(text: $text, tag: tag, isFirstResponder: isFirstResponder, placeholder: placeholder, onEditing: onEditing, onCommitted: onCommitted, didBeginEditing: didBeginEditing, didEndEditing: didEndEditing)
+    }
+    
+    public class Coordinator: NSObject, UITextFieldDelegate {
+        
+        // MARK: - PROPERTIES
+        
+        @Binding var text: String
+        let isFirstResponder: Bool
+        let tag: Int
+        var didBecomeFirstResponder = false
+        let placeholder: String?
+        let onEditing: ((String) -> Void)?
+        let onCommitted: (() -> Void)?
+        let didBeginEditing: (() -> Void)?
+        let didEndEditing: (() -> Void)?
+        
+        // MARK: - INIT
+        
+        public init(
+            text: Binding<String>,
+            tag: Int,
+            isFirstResponder: Bool = false,
+            placeholder: String? = nil,
+            onEditing: ((String) -> Void)? = nil,
+            onCommitted: (() -> Void)? = nil,
+            didBeginEditing: (() -> Void)? = nil,
+            didEndEditing: (() -> Void)? = nil
+        ) {
+            self._text = text
+            self.tag = tag
+            self.isFirstResponder = isFirstResponder
+            self.placeholder = placeholder
+            self.onEditing = onEditing
+            self.onCommitted = onCommitted
+            self.didBeginEditing = didBeginEditing
+            self.didEndEditing = didEndEditing
+        }
+        
+        public func textFieldDidChangeSelection(_ textField: UITextField) {
+            DispatchQueue.main.async {
+                self.text = textField.text ?? ""
+            }
+        }
+        
+        public func textFieldDidBeginEditing(_ textField: UITextField) {
+            self.didBeginEditing?()
+        }
+        
+        public func textFieldDidEndEditing(_ textField: UITextField) {
+            self.didEndEditing?()
+        }
+        
+        public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            if let next = textField.superview?.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+                next.becomeFirstResponder()
+            } else {
+                textField.resignFirstResponder()
+            }
+            return false
+        }
+        
+        public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            if let text = textField.text,
+               let textRange = Range(range, in: text) {
+                let updatedText = text.replacingCharacters(in: textRange, with: string)
+                self.onEditing?(updatedText)
+            }
+            return true
+        }
+        
     }
     
 }
@@ -64,22 +153,22 @@ public struct RespondableTextField: UIViewRepresentable {
 extension RespondableTextField {
     
     public func respondableSecureType() -> Self {
-        self.wrappableTextField.isSecureTextEntry = true
+        self.textField.isSecureTextEntry = true
         return self
     }
     
     public func respondableKeyboardType(_ type: UIKeyboardType) -> Self {
-        self.wrappableTextField.keyboardType = type
+        self.textField.keyboardType = type
         return self
     }
     
     public func respondableContentType(_ type: UITextContentType) -> Self {
-        self.wrappableTextField.textContentType = type
+        self.textField.textContentType = type
         return self
     }
     
     public func respondableCapitalization(_ type: UITextAutocapitalizationType) -> Self {
-        self.wrappableTextField.autocapitalizationType = type
+        self.textField.autocapitalizationType = type
         return self
     }
     
@@ -91,26 +180,26 @@ extension RespondableTextField {
 extension RespondableTextField {
     
     public func respondableFont(_ font: UIFont) -> Self {
-        self.wrappableTextField.font = font
+        self.textField.font = font
         return self
     }
     
     public func respondableLineStyle() -> Self {
-        self.wrappableTextField.borderStyle = .line
+        self.textField.borderStyle = .line
         return self
     }
     
     public func respondableBezelStyle() -> Self {
-        self.wrappableTextField.borderStyle = .bezel
+        self.textField.borderStyle = .bezel
         return self
     }
     
     public func textFieldStyle<S>(_ style: S) -> some View where S: TextFieldStyle {
         if style is RoundedBorderTextFieldStyle {
-            self.wrappableTextField.borderStyle = .roundedRect
+            self.textField.borderStyle = .roundedRect
         }
         if style is PlainTextFieldStyle || style is DefaultTextFieldStyle {
-            self.wrappableTextField.borderStyle = .none
+            self.textField.borderStyle = .none
         }
         return self
     }
