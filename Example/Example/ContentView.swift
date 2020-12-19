@@ -25,11 +25,16 @@ struct ContentView: View {
             Group {
                 Text("Default")
                     .font(.system(size: 14, weight: .bold, design: .default))
-                RespondableTextField(tag: 0, placeholder: "First TextField") { value in
-                    self.text1 = value
+                RespondableTextField(text: $text1, tag: 0, isFirstResponder: true, placeholder: "1st") { value in
+                    print("onEditing: \(value)")
                 } onCommitted: {
-                    print(self.text1)
+                    print("onCommitted")
+                } didBeginEditing: {
+                    print("didBeginEditing")
+                } didEndEditing: {
+                    print("didEndEditing")
                 }
+                
                 Text(text1)
             }
             
@@ -37,8 +42,14 @@ struct ContentView: View {
             Group {
                 Text("SecureType + RectangleLine Border")
                     .font(.system(size: 14, weight: .bold, design: .default))
-                RespondableTextField(tag: 1, placeholder: "Second TextField") { value in
-                    self.text2 = value
+                RespondableTextField(text: $text2, tag: 1, placeholder: "2nd") { value in
+                    print("onEditing: \(value)")
+                } onCommitted: {
+                    print("onCommitted")
+                } didBeginEditing: {
+                    print("didBeginEditing")
+                } didEndEditing: {
+                    print("didEndEditing")
                 }
                 .respondableSecureType()
                 .respondableLineStyle()
@@ -50,10 +61,14 @@ struct ContentView: View {
             Group {
                 Text("NumberPad + OneTimeCode + Rounded Border")
                     .font(.system(size: 14, weight: .bold, design: .default))
-                RespondableTextField(tag: 2, placeholder: "Third TextField") { value in
-                    self.text3 = value
+                RespondableTextField(text: $text3, tag: 2, placeholder: "3rd") { value in
+                    print("onEditing: \(value)")
                 } onCommitted: {
-                    print(self.text3)
+                    print("onCommitted")
+                } didBeginEditing: {
+                    print("didBeginEditing")
+                } didEndEditing: {
+                    print("didEndEditing")
                 }
                 .respondableKeyboardType(.numberPad)
                 .respondableContentType(.oneTimeCode)
@@ -62,19 +77,23 @@ struct ContentView: View {
                 Text(text3)
             }
             
-            // didBeginEditing + didEndEditing + Bazel Border + Font
+            // didEndEditing + Bazel Border + Font
             Group {
                 Text("didBeginEditing + didEndEditing + Bazel Border")
                     .font(.system(size: 14, weight: .bold, design: .default))
-                RespondableTextField(tag: 3, placeholder: "Fourth TextField") { value in
-                    self.text4 = value
+                RespondableTextField(text: $text4, tag: 3, placeholder: "4th") { value in
+                    print("onEditing: \(value)")
+                } onCommitted: {
+                    print("onCommitted")
                 } didBeginEditing: {
-                    print("Begin")
-                } didEndEditing: { _ in
-                    print("Done")
+                    print("didBeginEditing")
+                } didEndEditing: {
+                    print("didEndEditing")
                 }
                 .respondableBezelStyle()
                 .respondableFont(.systemFont(ofSize: 20, weight: .bold))
+                
+                Text(text4)
             }
             
         } //: V
