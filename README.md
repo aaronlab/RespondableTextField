@@ -34,7 +34,6 @@
     isFirstResponder: Bool = false,
     placeholder: String? = nil,
     onEditing: ((String) -> Void)? = nil,
-    onCommitted: (() -> Void)? = nil,
     didBeginEditing: (() -> Void)? = nil,
     didEndEditing: (() -> Void)? = nil
   )
@@ -77,8 +76,6 @@ struct ContentView: View {
                     .font(.system(size: 14, weight: .bold, design: .default))
                 RespondableTextField(text: $text1, tag: 0, isFirstResponder: true, placeholder: "1st") { value in
                     print("onEditing: \(value)")
-                } onCommitted: {
-                    print("onCommitted")
                 } didBeginEditing: {
                     print("didBeginEditing")
                 } didEndEditing: {
@@ -94,8 +91,6 @@ struct ContentView: View {
                     .font(.system(size: 14, weight: .bold, design: .default))
                 RespondableTextField(text: $text2, tag: 1, placeholder: "2nd") { value in
                     print("onEditing: \(value)")
-                } onCommitted: {
-                    print("onCommitted")
                 } didBeginEditing: {
                     print("didBeginEditing")
                 } didEndEditing: {
@@ -113,8 +108,6 @@ struct ContentView: View {
                     .font(.system(size: 14, weight: .bold, design: .default))
                 RespondableTextField(text: $text3, tag: 2, placeholder: "3rd") { value in
                     print("onEditing: \(value)")
-                } onCommitted: {
-                    print("onCommitted")
                 } didBeginEditing: {
                     print("didBeginEditing")
                 } didEndEditing: {
@@ -133,8 +126,6 @@ struct ContentView: View {
                     .font(.system(size: 14, weight: .bold, design: .default))
                 RespondableTextField(text: $text4, tag: 3, placeholder: "4th") { value in
                     print("onEditing: \(value)")
-                } onCommitted: {
-                    print("onCommitted")
                 } didBeginEditing: {
                     print("didBeginEditing")
                 } didEndEditing: {
