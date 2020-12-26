@@ -2,6 +2,7 @@
 ![Platform: iOS 13+](https://img.shields.io/badge/platform-iOS%2013%2B-blue?style=flat&logo=apple)
 ![SwiftPM compatible](https://img.shields.io/badge/SPM-compatible-brightgreen?style=flat&logo=swift)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey?style=flat)](https://github.com/aaronLab/SweetCardScanner/blob/main/LICENSE)
+[![Release version](https://img.shields.io/badge/release-v1.0.0-blue)](https://github.com/aaronLab/RespondableTextField/releases/tag/v1.0.0)
 
 # RespondableTextField
 
@@ -35,7 +36,8 @@
     placeholder: String? = nil,
     onEditing: ((String) -> Void)? = nil,
     didBeginEditing: (() -> Void)? = nil,
-    didEndEditing: (() -> Void)? = nil
+    didEndEditing: (() -> Void)? = nil,
+    shouldReturn: ((String?) -> Void)? = nil
   )
   ```
 
@@ -68,78 +70,90 @@ struct ContentView: View {
     // MARK: - BODY
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 30) {
-
-            // Default
-            Group {
-                Text("Default")
-                    .font(.system(size: 14, weight: .bold, design: .default))
-                RespondableTextField(text: $text1, tag: 0, isFirstResponder: true, placeholder: "1st") { value in
-                    print("onEditing: \(value)")
-                } didBeginEditing: {
-                    print("didBeginEditing")
-                } didEndEditing: {
-                    print("didEndEditing")
+        
+        ScrollView(showsIndicators: false) {
+            
+            VStack(alignment: .leading, spacing: 30) {
+                
+                // Default
+                Group {
+                    Text("Default")
+                        .font(.system(size: 14, weight: .bold, design: .default))
+                    RespondableTextField(text: $text1, tag: 0, isFirstResponder: true, placeholder: "1st") { value in
+                        print("onEditing: \(value)")
+                    } didBeginEditing: {
+                        print("didBeginEditing")
+                    } didEndEditing: {
+                        print("didEndEditing")
+                    } shouldReturn: { value in
+                        print("shouldReturn: \(value ?? "N/A")")
+                    }
+                    
+                    Text(text1)
                 }
-
-                Text(text1)
-            }
-
-            // SecureType + RectangleLine Border
-            Group {
-                Text("SecureType + RectangleLine Border")
-                    .font(.system(size: 14, weight: .bold, design: .default))
-                RespondableTextField(text: $text2, tag: 1, placeholder: "2nd") { value in
-                    print("onEditing: \(value)")
-                } didBeginEditing: {
-                    print("didBeginEditing")
-                } didEndEditing: {
-                    print("didEndEditing")
+                
+                // SecureType + RectangleLine Border
+                Group {
+                    Text("SecureType + RectangleLine Border")
+                        .font(.system(size: 14, weight: .bold, design: .default))
+                    RespondableTextField(text: $text2, tag: 1, placeholder: "2nd") { value in
+                        print("onEditing: \(value)")
+                    } didBeginEditing: {
+                        print("didBeginEditing")
+                    } didEndEditing: {
+                        print("didEndEditing")
+                    } shouldReturn: { value in
+                        print("shouldReturn: \(value ?? "N/A")")
+                    }
+                    .respondableSecureType()
+                    .respondableLineStyle()
+                    
+                    Text(text2)
                 }
-                .respondableSecureType()
-                .respondableLineStyle()
-
-                Text(text2)
-            }
-
-            // NumberPad + OneTimeCode + Rounded Border
-            Group {
-                Text("NumberPad + OneTimeCode + Rounded Border")
-                    .font(.system(size: 14, weight: .bold, design: .default))
-                RespondableTextField(text: $text3, tag: 2, placeholder: "3rd") { value in
-                    print("onEditing: \(value)")
-                } didBeginEditing: {
-                    print("didBeginEditing")
-                } didEndEditing: {
-                    print("didEndEditing")
+                
+                // NumberPad + OneTimeCode + Rounded Border
+                Group {
+                    Text("NumberPad + OneTimeCode + Rounded Border")
+                        .font(.system(size: 14, weight: .bold, design: .default))
+                    RespondableTextField(text: $text3, tag: 2, placeholder: "3rd") { value in
+                        print("onEditing: \(value)")
+                    } didBeginEditing: {
+                        print("didBeginEditing")
+                    } didEndEditing: {
+                        print("didEndEditing")
+                    } shouldReturn: { value in
+                        print("shouldReturn: \(value ?? "N/A")")
+                    }
+                    .respondableKeyboardType(.numberPad)
+                    .respondableContentType(.oneTimeCode)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    Text(text3)
                 }
-                .respondableKeyboardType(.numberPad)
-                .respondableContentType(.oneTimeCode)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                Text(text3)
-            }
-
-            // didEndEditing + Bazel Border + Font
-            Group {
-                Text("didBeginEditing + didEndEditing + Bazel Border")
-                    .font(.system(size: 14, weight: .bold, design: .default))
-                RespondableTextField(text: $text4, tag: 3, placeholder: "4th") { value in
-                    print("onEditing: \(value)")
-                } didBeginEditing: {
-                    print("didBeginEditing")
-                } didEndEditing: {
-                    print("didEndEditing")
+                
+                // didEndEditing + Bazel Border + Font
+                Group {
+                    Text("didBeginEditing + didEndEditing + Bazel Border")
+                        .font(.system(size: 14, weight: .bold, design: .default))
+                    RespondableTextField(text: $text4, tag: 3, placeholder: "4th") { value in
+                        print("onEditing: \(value)")
+                    } didBeginEditing: {
+                        print("didBeginEditing")
+                    } didEndEditing: {
+                        print("didEndEditing")
+                    } shouldReturn: { value in
+                        print("shouldReturn: \(value ?? "N/A")")
+                    }
+                    .respondableBezelStyle()
+                    .respondableFont(.systemFont(ofSize: 20, weight: .bold))
+                    
+                    Text(text4)
                 }
-                .respondableBezelStyle()
-                .respondableFont(.systemFont(ofSize: 20, weight: .bold))
-
-                Text(text4)
-            }
-
-        } //: V
-        .padding()
-
+                
+            } //: V
+            .padding()
+        } //: S
+        .preferredColorScheme(.light)
     }
 }
 
