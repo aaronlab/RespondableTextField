@@ -21,6 +21,7 @@ public struct RespondableTextField: UIViewRepresentable {
     let onEditing: ((String) -> Void)?
     let didBeginEditing: (() -> Void)?
     let didEndEditing: (() -> Void)?
+    let shouldReturn: ((String?) -> Void)?
     
     // MARK: - INIT
     
@@ -31,7 +32,8 @@ public struct RespondableTextField: UIViewRepresentable {
         placeholder: String? = nil,
         onEditing: ((String) -> Void)? = nil,
         didBeginEditing: (() -> Void)? = nil,
-        didEndEditing: (() -> Void)? = nil
+        didEndEditing: (() -> Void)? = nil,
+        shouldReturn: ((String?) -> Void)? = nil
     ) {
         self._text = text
         self.tag = tag
@@ -40,6 +42,7 @@ public struct RespondableTextField: UIViewRepresentable {
         self.onEditing = onEditing
         self.didBeginEditing = didBeginEditing
         self.didEndEditing = didEndEditing
+        self.shouldReturn = shouldReturn
     }
     
     // MARK: - UIViewRepresentable
@@ -69,7 +72,7 @@ public struct RespondableTextField: UIViewRepresentable {
 extension RespondableTextField {
     
     public func makeCoordinator() -> RespondableTextField.Coordinator {
-        return Coordinator(text: $text, tag: tag, isFirstResponder: isFirstResponder, placeholder: placeholder, onEditing: onEditing, didBeginEditing: didBeginEditing, didEndEditing: didEndEditing)
+        return Coordinator(text: $text, tag: tag, isFirstResponder: isFirstResponder, placeholder: placeholder, onEditing: onEditing, didBeginEditing: didBeginEditing, didEndEditing: didEndEditing, shouldReturn: shouldReturn)
     }
     
     public class Coordinator: NSObject, UITextFieldDelegate {
@@ -84,6 +87,7 @@ extension RespondableTextField {
         let onEditing: ((String) -> Void)?
         let didBeginEditing: (() -> Void)?
         let didEndEditing: (() -> Void)?
+        let shouldReturn: ((String?) -> Void)?
         
         // MARK: - INIT
         
@@ -94,7 +98,8 @@ extension RespondableTextField {
             placeholder: String? = nil,
             onEditing: ((String) -> Void)? = nil,
             didBeginEditing: (() -> Void)? = nil,
-            didEndEditing: (() -> Void)? = nil
+            didEndEditing: (() -> Void)? = nil,
+            shouldReturn: ((String?) -> Void)? = nil
         ) {
             self._text = text
             self.tag = tag
@@ -103,6 +108,7 @@ extension RespondableTextField {
             self.onEditing = onEditing
             self.didBeginEditing = didBeginEditing
             self.didEndEditing = didEndEditing
+            self.shouldReturn = shouldReturn
         }
         
         public func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -125,6 +131,7 @@ extension RespondableTextField {
             } else {
                 textField.resignFirstResponder()
             }
+            shouldReturn?(textField.text)
             return false
         }
         
