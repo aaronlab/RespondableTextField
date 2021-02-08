@@ -2,7 +2,7 @@
 ![Platform: iOS 13+](https://img.shields.io/badge/platform-iOS%2013%2B-blue?style=flat&logo=apple)
 ![SwiftPM compatible](https://img.shields.io/badge/SPM-compatible-brightgreen?style=flat&logo=swift)
 [![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey?style=flat)](https://github.com/aaronLab/SweetCardScanner/blob/main/LICENSE)
-[![Release version](https://img.shields.io/badge/release-v1.0.0-blue)](https://github.com/aaronLab/RespondableTextField/releases/tag/v1.0.0)
+[![Release version](https://img.shields.io/badge/release-v1.0.1-blue)](https://github.com/aaronLab/RespondableTextField/releases/tag/v1.0.0)
 
 # RespondableTextField
 
@@ -70,11 +70,11 @@ struct ContentView: View {
     // MARK: - BODY
 
     var body: some View {
-        
+
         ScrollView(showsIndicators: false) {
-            
+
             VStack(alignment: .leading, spacing: 30) {
-                
+
                 // Default
                 Group {
                     Text("Default")
@@ -88,10 +88,10 @@ struct ContentView: View {
                     } shouldReturn: { value in
                         print("shouldReturn: \(value ?? "N/A")")
                     }
-                    
+
                     Text(text1)
                 }
-                
+
                 // SecureType + RectangleLine Border
                 Group {
                     Text("SecureType + RectangleLine Border")
@@ -107,10 +107,10 @@ struct ContentView: View {
                     }
                     .respondableSecureType()
                     .respondableLineStyle()
-                    
+
                     Text(text2)
                 }
-                
+
                 // NumberPad + OneTimeCode + Rounded Border
                 Group {
                     Text("NumberPad + OneTimeCode + Rounded Border")
@@ -127,10 +127,10 @@ struct ContentView: View {
                     .respondableKeyboardType(.numberPad)
                     .respondableContentType(.oneTimeCode)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
+
                     Text(text3)
                 }
-                
+
                 // didEndEditing + Bazel Border + Font
                 Group {
                     Text("didBeginEditing + didEndEditing + Bazel Border")
@@ -146,10 +146,10 @@ struct ContentView: View {
                     }
                     .respondableBezelStyle()
                     .respondableFont(.systemFont(ofSize: 20, weight: .bold))
-                    
+
                     Text(text4)
                 }
-                
+
             } //: V
             .padding()
         } //: S
