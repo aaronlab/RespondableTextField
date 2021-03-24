@@ -30,6 +30,8 @@ public struct RespondableTextField: UIViewRepresentable {
         tag: Int,
         isFirstResponder: Bool = false,
         placeholder: String? = nil,
+        width: CGFloat? = nil,
+        height: CGFloat? = nil,
         onEditing: ((String) -> Void)? = nil,
         didBeginEditing: (() -> Void)? = nil,
         didEndEditing: (() -> Void)? = nil,
@@ -39,6 +41,17 @@ public struct RespondableTextField: UIViewRepresentable {
         self.tag = tag
         self.isFirstResponder = isFirstResponder
         self.placeholder = placeholder
+        
+        if let width = width {
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        
+        if let height = height {
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+        
         self.onEditing = onEditing
         self.didBeginEditing = didBeginEditing
         self.didEndEditing = didEndEditing
@@ -145,6 +158,7 @@ extension RespondableTextField {
         }
         
     }
+    
     
 }
 

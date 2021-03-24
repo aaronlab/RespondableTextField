@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A42AB368260B474E001422E8 /* RespondableTextField in Frameworks */ = {isa = PBXBuildFile; productRef = A42AB367260B474E001422E8 /* RespondableTextField */; };
 		A4C784C7258B91B7009BB00C /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C784C6258B91B7009BB00C /* ExampleApp.swift */; };
 		A4C784C9258B91B7009BB00C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C784C8258B91B7009BB00C /* ContentView.swift */; };
 		A4C784CB258B91B9009BB00C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C784CA258B91B9009BB00C /* Assets.xcassets */; };
 		A4C784CE258B91B9009BB00C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4C784CD258B91B9009BB00C /* Preview Assets.xcassets */; };
-		A4C784DB258B9213009BB00C /* RespondableTextField in Frameworks */ = {isa = PBXBuildFile; productRef = A4C784DA258B9213009BB00C /* RespondableTextField */; };
-		A4C784DC258B9213009BB00C /* RespondableTextField in Embed Frameworks */ = {isa = PBXBuildFile; productRef = A4C784DA258B9213009BB00C /* RespondableTextField */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,7 +21,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A4C784DC258B9213009BB00C /* RespondableTextField in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -44,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4C784DB258B9213009BB00C /* RespondableTextField in Frameworks */,
+				A42AB368260B474E001422E8 /* RespondableTextField in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +112,7 @@
 			);
 			name = Example;
 			packageProductDependencies = (
-				A4C784DA258B9213009BB00C /* RespondableTextField */,
+				A42AB367260B474E001422E8 /* RespondableTextField */,
 			);
 			productName = Example;
 			productReference = A4C784C3258B91B7009BB00C /* Example.app */;
@@ -361,7 +359,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A4C784DA258B9213009BB00C /* RespondableTextField */ = {
+		A42AB367260B474E001422E8 /* RespondableTextField */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = RespondableTextField;
 		};

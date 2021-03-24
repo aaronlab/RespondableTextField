@@ -28,7 +28,10 @@ struct ContentView: View {
                 Group {
                     Text("Default")
                         .font(.system(size: 14, weight: .bold, design: .default))
-                    RespondableTextField(text: $text1, tag: 0, isFirstResponder: true, placeholder: "1st") { value in
+                    RespondableTextField(text: $text1,
+                                         tag: 0,
+                                         isFirstResponder: true,
+                                         placeholder: "1st") { value in
                         print("onEditing: \(value)")
                     } didBeginEditing: {
                         print("didBeginEditing")
@@ -45,7 +48,11 @@ struct ContentView: View {
                 Group {
                     Text("SecureType + RectangleLine Border")
                         .font(.system(size: 14, weight: .bold, design: .default))
-                    RespondableTextField(text: $text2, tag: 1, placeholder: "2nd") { value in
+                    RespondableTextField(text: $text2,
+                                         tag: 1,
+                                         placeholder: "2nd",
+                                         width: 200,
+                                         height: 50) { value in
                         print("onEditing: \(value)")
                     } didBeginEditing: {
                         print("didBeginEditing")
@@ -64,7 +71,9 @@ struct ContentView: View {
                 Group {
                     Text("NumberPad + OneTimeCode + Rounded Border")
                         .font(.system(size: 14, weight: .bold, design: .default))
-                    RespondableTextField(text: $text3, tag: 2, placeholder: "3rd") { value in
+                    RespondableTextField(text: $text3,
+                                         tag: 2,
+                                         placeholder: "3rd") { value in
                         print("onEditing: \(value)")
                     } didBeginEditing: {
                         print("didBeginEditing")
@@ -84,7 +93,9 @@ struct ContentView: View {
                 Group {
                     Text("didBeginEditing + didEndEditing + Bazel Border")
                         .font(.system(size: 14, weight: .bold, design: .default))
-                    RespondableTextField(text: $text4, tag: 3, placeholder: "4th") { value in
+                    RespondableTextField(text: $text4,
+                                         tag: 3,
+                                         placeholder: "4th") { value in
                         print("onEditing: \(value)")
                     } didBeginEditing: {
                         print("didBeginEditing")

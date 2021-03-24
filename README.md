@@ -34,6 +34,8 @@
     tag: Int,
     isFirstResponder: Bool = false,
     placeholder: String? = nil,
+    width: CGFloat? = nil,
+    height: CGFloat? = nil,
     onEditing: ((String) -> Void)? = nil,
     didBeginEditing: (() -> Void)? = nil,
     didEndEditing: (() -> Void)? = nil,
@@ -43,6 +45,25 @@
 
 - Also, you don't have to fill all of the optional parameters or `isFirstResponder`.
 - You can make the textField the first responder with `isFirstResponder = true`.
+
+## Extensions
+
+- `respondableSecureType()`
+  - Secure type
+- `respondableKeyboardType(_ type: UIKeyboardType)`
+  - Change keyboard type
+- `respondableContentType(_ type: UITextContentType)`
+  - Change content type
+- `respondableCapitalization(_ type: UITextAutocapitalizationType)`
+  - Capitalization change
+- `respondableFont(_ font: UIFont)`
+  - Change font
+- `respondableLineStyle()`
+  - Borderstyle: .line
+- `respondableBezelStyle()`
+  - Borderstyle: .bezel
+- `textFieldStyle<S>(_ style: S) -> some View where S: TextFieldStyle`
+  - Borderstyle: .roundedRect, .none
 
 ## Example
 
@@ -79,7 +100,10 @@ struct ContentView: View {
                 Group {
                     Text("Default")
                         .font(.system(size: 14, weight: .bold, design: .default))
-                    RespondableTextField(text: $text1, tag: 0, isFirstResponder: true, placeholder: "1st") { value in
+                    RespondableTextField(text: $text1,
+                                         tag: 0,
+                                         isFirstResponder: true,
+                                         placeholder: "1st") { value in
                         print("onEditing: \(value)")
                     } didBeginEditing: {
                         print("didBeginEditing")
@@ -96,7 +120,11 @@ struct ContentView: View {
                 Group {
                     Text("SecureType + RectangleLine Border")
                         .font(.system(size: 14, weight: .bold, design: .default))
-                    RespondableTextField(text: $text2, tag: 1, placeholder: "2nd") { value in
+                    RespondableTextField(text: $text2,
+                                         tag: 1,
+                                         placeholder: "2nd",
+                                         width: 200,
+                                         height: 50) { value in
                         print("onEditing: \(value)")
                     } didBeginEditing: {
                         print("didBeginEditing")
@@ -115,7 +143,9 @@ struct ContentView: View {
                 Group {
                     Text("NumberPad + OneTimeCode + Rounded Border")
                         .font(.system(size: 14, weight: .bold, design: .default))
-                    RespondableTextField(text: $text3, tag: 2, placeholder: "3rd") { value in
+                    RespondableTextField(text: $text3,
+                                         tag: 2,
+                                         placeholder: "3rd") { value in
                         print("onEditing: \(value)")
                     } didBeginEditing: {
                         print("didBeginEditing")
@@ -135,7 +165,9 @@ struct ContentView: View {
                 Group {
                     Text("didBeginEditing + didEndEditing + Bazel Border")
                         .font(.system(size: 14, weight: .bold, design: .default))
-                    RespondableTextField(text: $text4, tag: 3, placeholder: "4th") { value in
+                    RespondableTextField(text: $text4,
+                                         tag: 3,
+                                         placeholder: "4th") { value in
                         print("onEditing: \(value)")
                     } didBeginEditing: {
                         print("didBeginEditing")
